@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cristian — Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0d11;
+    --bg-alt: #0f1319;
+    --bg-raised: #141a22;
+    --text: #e8ecf2;
+    --text-dim: #6f7d8c;
+    --text-dimmer: #4a5560;
+    --cyan: #3adcff;
+    --amber: #ff8a3d;
+    --violet: #8b6bff;
+    --line: rgba(255, 255, 255, 0.08);
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--cyan); color: var(--bg); }
+
+  a { color: inherit; text-decoration: none; }
+
+  :focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 8vw;
+    overflow: hidden;
+  }
+
+  #node-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 30% 40%, transparent 0%, var(--bg) 85%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--cyan);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    margin-bottom: 1.5rem;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--cyan);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .headline {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3rem, 9vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    position: relative;
+  }
+
+  .headline .line {
+    display: block;
+    overflow: hidden;
+  }
+
+  .headline .line span {
+    display: inline-block;
+    transform: translateY(110%);
+    animation: reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .headline .line:nth-child(1) span { animation-delay: 0.1s; }
+  .headline .line:nth-child(2) span { animation-delay: 0.25s; color: var(--cyan); }
+
+  @keyframes reveal-up {
+    to { transform: translateY(0); }
+  }
+
+  .headline .glitch-target {
+    position: relative;
+    display: inline-block;
+  }
+
+  .subtitle {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    color: var(--text-dim);
+    margin-top: 2rem;
+    max-width: 46ch;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fade-in 1s ease forwards;
+    animation-delay: 0.8s;
+  }
+
+  .subtitle .accent { color: var(--amber); }
+
+  @keyframes fade-in {
+    to { opacity: 1; }
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fade-in 1s ease forwards;
+    animation-delay: 1.1s;
+  }
+
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 0.85em 1.6em;
+    border-radius: 2px;
+    border: 1px solid var(--line);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+  }
+
+  .btn-primary {
+    background: var(--cyan);
+    color: var(--bg);
+    border-color: var(--cyan);
+    font-weight: 600;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(58, 220, 255, 0.25); }
+
+  .btn-ghost:hover { border-color: var(--text-dim); background: var(--bg-raised); }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 3rem;
+    left: 8vw;
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-dimmer);
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .scroll-cue .bar {
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(var(--text-dimmer), transparent);
+    animation: scroll-move 1.8s ease-in-out infinite;
+  }
+
+  @keyframes scroll-move {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    50.1% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ============ PROJECTS / TERMINAL HUB ============ */
+  .directory {
+    position: relative;
+    z-index: 2;
+    background: var(--bg);
+    padding: 6rem 8vw 8rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .directory-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .directory-header h2 {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .directory-header h2 .path { color: var(--cyan); }
+
+  .directory-count {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-dimmer);
+  }
+
+  .project-row {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr auto auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.25s ease, padding-left 0.25s ease;
+    cursor: pointer;
+  }
+
+  .project-row:first-child { border-top: 1px solid var(--line); }
+
+  .project-row.active-project:hover,
+  .project-row.active-project:focus-visible {
+    background: var(--bg-alt);
+    padding-left: 1.6rem;
+  }
+
+  .project-row.pending {
+    cursor: default;
+    opacity: 0.45;
+  }
+
+  .row-id {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-dimmer);
+  }
+
+  .active-project .row-id { color: var(--cyan); }
+
+  .row-main .row-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  .row-main .row-desc {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+
+  .row-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.35em 0.8em;
+    border-radius: 2px;
+    border: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  .row-tag.tag-live { color: var(--cyan); border-color: rgba(58, 220, 255, 0.3); }
+  .row-tag.tag-pending { color: var(--text-dimmer); }
+
+  .row-arrow {
+    font-family: var(--font-mono);
+    color: var(--text-dimmer);
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+
+  .active-project:hover .row-arrow { transform: translateX(4px); color: var(--cyan); }
+
+  @media (max-width: 640px) {
+    .project-row { grid-template-columns: 2.5rem 1fr; row-gap: 0.75rem; }
+    .row-tag, .row-arrow { grid-column: 2; justify-self: start; }
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 3rem 8vw;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-dimmer);
+  }
+
+  footer a { color: var(--text-dim); transition: color 0.2s ease; }
+  footer a:hover { color: var(--cyan); }
+
+  .footer-links { display: flex; gap: 1.5rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <canvas id="node-canvas"></canvas>
+
+  <div class="hero-content">
+    <p class="eyebrow">system.init — portfolio v1</p>
+    <h1 class="headline">
+      <span class="line"><span>CRISTIAN</span></span>
+      <span class="line"><span class="glitch-target" id="glitchWord">ALVARENGA QUITO</span></span>
+    </h1>
+    <p class="subtitle">
+      Técnico Químico reconvertido a <span class="accent">desarrollador frontend</span>.
+      De fórmulas a componentes — mismo método, distinta materia prima.
+    </p>
+    <div class="hero-cta">
+      <a href="#directorio" class="btn btn-primary">Ver proyectos ↓</a>
+      <a href="#" class="btn btn-ghost">Descargar CV</a>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span class="bar"></span>
+    SCROLL
+  </div>
+</section>
+
+<section class="directory" id="directorio">
+  <div class="directory-header">
+    <h2><span class="path">~/cristian/</span>proyectos</h2>
+    <span class="directory-count" id="dirCount"></span>
+  </div>
+  <div id="projectList"></div>
+</section>
+
+<footer>
+  <span>© 2026 Cristian — Buenos Aires, AR</span>
+  <div class="footer-links">
+    <a href="#">GitHub</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Email</a>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================
+   HUB DE PROYECTOS
+   Para agregar un proyecto nuevo en el futuro: sumá un objeto
+   a este array. No hace falta tocar el resto del código.
+   status: "live" (clickeable) | "pending" (todavía no existe)
+   ========================================================== */
+const PROJECTS = [
+  {
+    id: '01',
+    title: 'Este Hero',
+    desc: 'Landing central del portfolio — estás viéndolo ahora mismo.',
+    tag: 'ACTUAL',
+    status: 'live',
+    href: '#'
+  },
+  {
+    id: '02',
+    title: 'Próximo proyecto',
+    desc: 'Se agrega acá cuando esté listo.',
+    tag: 'PRÓXIMAMENTE',
+    status: 'pending',
+    href: null
+  },
+  {
+    id: '03',
+    title: 'Próximo proyecto',
+    desc: 'Se agrega acá cuando esté listo.',
+    tag: 'PRÓXIMAMENTE',
+    status: 'pending',
+    href: null
+  }
+];
+
+function renderProjects() {
+  const list = document.getElementById('projectList');
+  const count = document.getElementById('dirCount');
+  const liveCount = PROJECTS.filter(p => p.status === 'live').length;
+  count.textContent = `${liveCount} activo${liveCount !== 1 ? 's' : ''} / ${PROJECTS.length} total`;
+
+  list.innerHTML = PROJECTS.map(p => {
+    const isLive = p.status === 'live';
+    const tagClass = isLive ? 'tag-live' : 'tag-pending';
+    const rowClass = isLive ? 'active-project' : 'pending';
+    const tabindex = isLive ? '0' : '-1';
+
+    return `
+      <${isLive ? 'a href="' + p.href + '"' : 'div'}
+        class="project-row ${rowClass}"
+        ${isLive ? '' : 'aria-disabled="true"'}
+        tabindex="${tabindex}">
+        <span class="row-id">${p.id}</span>
+        <div class="row-main">
+          <div class="row-title">${p.title}</div>
+          <div class="row-desc">${p.desc}</div>
+        </div>
+        <span class="row-tag ${tagClass}">${p.tag}</span>
+        <span class="row-arrow">${isLive ? '→' : '·'}</span>
+      </${isLive ? 'a' : 'div'}>
+    `;
+  }).join('');
+}
+renderProjects();
+
+/* ==========================================================
+   RED DE NODOS (fondo del hero) — estética molecular/datos
+   ========================================================== */
+const canvas = document.getElementById('node-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, nodes = [];
+const NODE_COUNT = 70;
+const LINK_DIST = 140;
+const mouse = { x: -9999, y: -9999 };
+
+function resize() {
+  W = canvas.width = canvas.offsetWidth;
+  H = canvas.height = canvas.offsetHeight;
+}
+window.addEventListener('resize', resize);
+
+function initNodes() {
+  nodes = Array.from({ length: NODE_COUNT }, () => ({
+    x: Math.random() * W,
+    y: Math.random() * H,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    r: Math.random() * 1.5 + 1
+  }));
+}
+
+function step() {
+  ctx.clearRect(0, 0, W, H);
+
+  for (const n of nodes) {
+    n.x += n.vx;
+    n.y += n.vy;
+    if (n.x < 0 || n.x > W) n.vx *= -1;
+    if (n.y < 0 || n.y > H) n.vy *= -1;
+  }
+
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const a = nodes[i], b = nodes[j];
+      const dx = a.x - b.x, dy = a.y - b.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < LINK_DIST) {
+        const distToMouse = Math.min(
+          Math.hypot(a.x - mouse.x, a.y - mouse.y),
+          Math.hypot(b.x - mouse.x, b.y - mouse.y)
+        );
+        const near = distToMouse < 180;
+        ctx.strokeStyle = near
+          ? `rgba(58, 220, 255, ${0.5 * (1 - dist / LINK_DIST)})`
+          : `rgba(122, 138, 153, ${0.12 * (1 - dist / LINK_DIST)})`;
+        ctx.lineWidth = near ? 1 : 0.6;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  for (const n of nodes) {
+    const distToMouse = Math.hypot(n.x - mouse.x, n.y - mouse.y);
+    const near = distToMouse < 180;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, near ? n.r * 2 : n.r, 0, Math.PI * 2);
+    ctx.fillStyle = near ? '#3adcff' : 'rgba(232, 236, 242, 0.35)';
+    ctx.fill();
+  }
+
+  requestAnimationFrame(step);
+}
+
+canvas.addEventListener('mousemove', e => {
+  const rect = canvas.getBoundingClientRect();
+  mouse.x = e.clientX - rect.left;
+  mouse.y = e.clientY - rect.top;
+});
+canvas.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+resize();
+initNodes();
+step();
+
+/* ==========================================================
+   GLITCH sobre "COMPILA IDEAS" — se dispara al cargar y
+   ocasionalmente después, como un parpadeo de terminal
+   ========================================================== */
+const glitchEl = document.getElementById('glitchWord');
+const glitchChars = '!<>-_\\/[]{}—=+*^?#________';
+const originalText = glitchEl.textContent;
+
+function glitchBurst(duration   = 500) {
+  const start = performance.now();
+  function frame(now) {
+    const elapsed = now - start;
+    if (elapsed > duration) {
+      glitchEl.textContent = originalText;
+      return;
+    }
+    const progress = elapsed / duration;
+    glitchEl.textContent = originalText
+      .split('')
+      .map((ch, i) => {
+        if (ch === ' ') return ' ';
+        const revealPoint = (i / originalText.length);
+        if (progress > revealPoint + 0.3) return ch;
+        return glitchChars[Math.floor(Math.random() * glitchChars.length)];
+      })
+      .join('');
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+setTimeout(() => glitchBurst(700), 300);
+setInterval(() => glitchBurst(400), 8000);
+</script>
+
+</body>
+</html>
