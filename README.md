@@ -1,61 +1,178 @@
-# Cristian — Portfolio
+# Cristian Alvarenga — Portfolio 🚀
 
-Landing/hero central de mi portfolio como desarrollador frontend. Funciona además como hub de navegación: a medida que voy sumando proyectos, se listan acá mismo.
+Portfolio personal de **Cristian Alvarenga**, desarrollador frontend argentino.
+
+Una landing interactiva diseñada como carta de presentación profesional y como hub central para mostrar proyectos, experimentos digitales y soluciones frontend.
 
 🔗 **Demo:** https://crissacio.github.io/Portafolio-CristianAlvarenga/
 
-## Sobre este proyecto
+---
 
-Hero con estética cyber/técnica (fondo de nodos conectados tipo red molecular, reactivo al mouse, con headline animado). Diseñado y construido en HTML, CSS y JavaScript puro — sin frameworks ni dependencias que instalar.
+## ✨ Sobre el proyecto
 
-## Stack
+Este proyecto nació con la idea de crear algo más que un portfolio tradicional.
 
-- HTML5 / CSS3
-- JavaScript (Canvas API para el fondo animado)
-- Tipografías: Space Grotesk, Inter, JetBrains Mono (Google Fonts)
+La landing funciona como una interfaz tecnológica donde se combinan:
 
-## Cómo verlo localmente
+- Diseño visual moderno
+- Animaciones personalizadas
+- Interacciones en tiempo real
+- Identidad técnica inspirada en sistemas, datos e ingeniería
 
-No requiere instalación. Cloná el repo y abrí `index.html` directo en el navegador:
+El concepto visual está basado en una mezcla entre:
+
+- Interfaces futuristas
+- Sistemas de monitoreo
+- Redes neuronales / estructuras moleculares
+- Terminales de desarrollo
+
+El fondo animado utiliza una red de nodos conectados que responde al movimiento del mouse, generando una experiencia dinámica sin depender de librerías externas.
+
+---
+
+# 🧠 Historia detrás del proyecto
+
+Antes de dedicarme al desarrollo frontend trabajé como **Técnico Químico**.
+
+Este portfolio representa esa transición:
+
+De trabajar con fórmulas, procesos y precisión técnica...
+
+a construir interfaces digitales, componentes y experiencias de usuario.
+
+La idea principal es mantener la misma filosofía:
+
+> Analizar problemas, diseñar soluciones y crear sistemas eficientes.
+
+---
+
+# 🛠️ Tecnologías utilizadas
+
+## Frontend
+
+- HTML5
+- CSS3
+- JavaScript ES6+
+
+## Animaciones e interacción
+
+- Canvas API
+- CSS Animations
+- Microinteracciones personalizadas
+- Efectos visuales sin frameworks
+
+## Diseño
+
+- Space Grotesk
+- Inter
+- JetBrains Mono
+
+(Google Fonts)
+
+---
+
+# ⚡ Características principales
+
+✅ Landing responsive  
+✅ Fondo interactivo con Canvas  
+✅ Sistema de nodos conectado al mouse  
+✅ Animaciones de entrada  
+✅ Efectos tipo interfaz tecnológica  
+✅ Hub dinámico de proyectos  
+✅ Diseño adaptable para desktop y mobile  
+✅ Optimizado sin dependencias externas  
+
+---
+
+# 📂 Estructura del proyecto
+
+
+/
+│
+├── index.html
+├── cv-cristianalvarenga.pdf
+├── README.md
+│
+└── copia/
+└── versión de respaldo
+
+
+El proyecto está construido en un único archivo HTML que contiene:
+
+- Estructura HTML
+- Estilos CSS
+- Lógica JavaScript
+
+Esto permite una ejecución simple y directa sin instalación previa.
+
+---
+
+# 🚀 Ejecutarlo localmente
+
+No requiere instalación.
+
+Clonar el repositorio:
 
 ```bash
-git clone https://crissacio.github.io/Portafolio-CristianAlvarenga/
-cd NOMBRE-REPO
-open index.html   # o doble clic en el archivo
-```
+git clone https://github.com/crissacio/Portafolio-CristianAlvarenga.git
 
-## Estructura
+Ingresar a la carpeta:
 
-```
-index.html   → todo el proyecto: HTML, CSS y JS en un solo archivo
-```
+cd Portafolio-CristianAlvarenga
 
-## Cómo agregar un proyecto nuevo al hub
+Abrir:
 
-Dentro de `index.html`, buscar el array `PROJECTS` (dentro del `<script>`) y sumar un objeto:
+index.html
 
-```javascript
+directamente en el navegador.
+
+📌 Hub de proyectos
+
+El portfolio cuenta con un sistema de proyectos dinámico.
+
+Para agregar uno nuevo se modifica el array:
+
+const PROJECTS = []
+
+Ejemplo:
+
 {
-  id: '04',
-  title: 'Nombre del proyecto',
-  desc: 'Una línea corta describiéndolo',
-  tag: 'LIVE',
-  status: 'live',
-  href: 'https://link-al-proyecto.com'
+  id:"06",
+  title:"Nuevo Proyecto",
+  desc:"Descripción del proyecto",
+  tag:"LIVE",
+  status:"live",
+  href:"https://proyecto.com"
 }
-```
 
-El listado del hub se genera solo a partir de ese array — no hace falta tocar el HTML ni el CSS.
+El listado se genera automáticamente.
 
-## Roadmap
+🗺️ Próximas mejoras
+ Landing principal
+ Sistema de proyectos dinámico
+ Animaciones e identidad visual
+ CV descargable
 
-- [ ] Proyecto 2 (frontend)
-- [ ] Proyecto 3 (datos/API)
-- [ ] Migrar estructura a Vite cuando el portfolio tenga más de una página
-- [ ] Agregar CV descargable
+Próximos pasos:
 
-## Contacto
+Mejorar accesibilidad
+Incorporar nuevos proyectos frontend
+Agregar casos de estudio
+Migrar algunas partes a React/Vite
+Crear nuevas experiencias interactivas
+👨‍💻 Contacto
 
-- GitHub: [tu usuario]
-- LinkedIn: [tu perfil]
-- Email: [tu email]
+Cristian Alvarenga
+
+📍 Buenos Aires, Argentina
+
+GitHub:
+https://github.com/crissacio
+
+LinkedIn:
+https://www.linkedin.com/in/cristian-eduardo-alvarenga-quito-a27977374/
+
+Email:
+cristianquito.edu@gmail.com
+
+⭐ Si te interesa el desarrollo frontend, las interfaces modernas y la creación de experiencias digitales, este portfolio es un reflejo del camino que estoy construyendo.
