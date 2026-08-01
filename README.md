@@ -2,7 +2,7 @@
 
 Landing/hero central de mi portfolio como desarrollador frontend. Funciona además como hub de navegación: a medida que voy sumando proyectos, se listan acá mismo.
 
-🔗 **Demo:** https://TU-USUARIO.github.io/NOMBRE-REPO/
+🔗 **Demo:** https://crissacio.github.io/Portafolio-CristianAlvarenga/
 
 ## Sobre este proyecto
 
@@ -19,7 +19,7 @@ Hero con estética cyber/técnica (fondo de nodos conectados tipo red molecular,
 No requiere instalación. Cloná el repo y abrí `index.html` directo en el navegador:
 
 ```bash
-git clone https://github.com/TU-USUARIO/NOMBRE-REPO.git
+git clone https://crissacio.github.io/Portafolio-CristianAlvarenga/
 cd NOMBRE-REPO
 open index.html   # o doble clic en el archivo
 ```
